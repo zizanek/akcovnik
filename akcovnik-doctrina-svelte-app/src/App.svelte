@@ -4,6 +4,7 @@
   let csvFile;
   let jsonData = [];
   let error = "";
+  let jsonFilePath = "data.json"; // Cesta k JSON souboru
 
   // Funkce na čtení CSV souboru a převod do JSON
   function handleFile(event) {
@@ -13,7 +14,6 @@
     const reader = new FileReader();
     reader.onload = function (e) {
       try {
-        // Ověření, že `result` je typu ArrayBuffer
         if (e.target && e.target.result instanceof ArrayBuffer) {
           const decoder = new TextDecoder("windows-1250");
           const csv = decoder.decode(new Uint8Array(e.target.result));
@@ -31,9 +31,9 @@
 
   // CSV -> JSON převod
   function csvToJson(csvText) {
-    const rows = csvText.split("\n").map(row => row.split(";"));
+    const rows = csvText.split("\n").map((row) => row.split(";"));
     const headers = rows[0];
-    return rows.slice(1).map(row =>
+    return rows.slice(1).map((row) =>
       headers.reduce((acc, header, index) => {
         acc[header.trim()] = row[index]?.trim() || "";
         return acc;
@@ -51,18 +51,26 @@
     link.click();
     URL.revokeObjectURL(url);
   }
+
+  // Načtení JSON souboru při spuštění
+  onMount(async () => {
+    try {
+      const response = await fetch(jsonFilePath);
+      if (!response.ok) throw new Error("JSON soubor nenalezen.");
+      const data = await response.json();
+      jsonData = data;
+      error = "";
+    } catch (err) {
+      error = "Načtěte prosím JSON soubor.";
+    }
+  });
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+  /* Styly zůstávají nezměněné */
   h1, h2, h3, p, table {
-    /*font-family: 'Roboto', sans-serif;*/
-    /* font-family: 'Poppins', sans-serif;*/
     font-family: "Open Sans", sans-serif;
-  } 
+  }
 
   .error {
     color: red;
@@ -101,7 +109,7 @@
   <input type="file" accept=".csv" on:change={handleFile} />
   <button on:click={exportJson} disabled={!jsonData.length}>Exportovat do JSON</button>
 
-  {#if error}
+  {#if error && !jsonData.length}
     <div class="error">{error}</div>
   {/if}
 
