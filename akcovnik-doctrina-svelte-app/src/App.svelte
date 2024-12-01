@@ -13,14 +13,20 @@
     const reader = new FileReader();
     reader.onload = function (e) {
       try {
-        const csv = e.target.result;
-        jsonData = csvToJson(csv);
-        error = ""; // Vyčištění případné chyby
+        // Ověření, že `result` je typu ArrayBuffer
+        if (e.target && e.target.result instanceof ArrayBuffer) {
+          const decoder = new TextDecoder("windows-1250");
+          const csv = decoder.decode(new Uint8Array(e.target.result));
+          jsonData = csvToJson(csv);
+          error = ""; // Vyčištění případné chyby
+        } else {
+          error = "Nepodporovaný formát souboru.";
+        }
       } catch (err) {
         error = "Chyba při zpracování souboru.";
       }
     };
-    reader.readAsText(file);
+    reader.readAsArrayBuffer(file);
   }
 
   // CSV -> JSON převod
