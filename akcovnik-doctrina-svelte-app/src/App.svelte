@@ -61,9 +61,22 @@
     border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
+    color: #333; /* Kontrastní barva textu */
   }
   th {
-    background-color: #f4f4f4;
+    background-color: #3498db; /* Modré pozadí */
+    color: white; /* Bílý text */
+    font-weight: bold; /* Tučný text */
+  }
+  td {
+    background-color: #ffffff; /* Bílé pozadí */
+    color: #333; /* Tmavý text */
+  }
+  th:hover {
+    background-color: #2980b9; /* Tmavší modré při hoveru */
+  }
+  td:hover {
+    background-color: #f2f2f2; /* Světle šedé při hoveru */
   }
 </style>
 
