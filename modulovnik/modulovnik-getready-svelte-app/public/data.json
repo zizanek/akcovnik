@@ -1,17 +1,101 @@
-{
-  "headers": ["Modul", "Popis", "Autor", "Verze"],
-  "rows": [
-      {
-          "Modul": "Modul A",
-          "Popis": "Modul na správu objednávek",
-          "Autor": "John Doe",
-          "Verze": "1.0.0"
-      },
-      {
-          "Modul": "Modul B",
-          "Popis": "Modul pro napojení na API",
-          "Autor": "Jane Smith",
-          "Verze": "2.1.3"
-      }
-  ]
-}
+[
+  {
+    "Název modulu": "ordercomments",
+    "Marketingový název modulu": "Poznámka u objednávky",
+    "Poslední verze modulu": "v2.3.1",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/ordercomments/",
+    "Kategorie": "checkout",
+    "Prezentovat na DOCS": "Ano",
+    "Stav dokumentace": "Done",
+    "Develop": "Ano",
+    "Live": "Ano"
+  },
+  {
+    "Název modulu": "balikovna",
+    "Marketingový název modulu": "Balíkovna",
+    "Poslední verze modulu": "",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/shipping-methods/ceska-posta/balikovna",
+    "Kategorie": "Shipping-methods",
+    "Prezentovat na DOCS": "Ano",
+    "Stav dokumentace": "Done",
+    "Develop": "Ano",
+    "Live": "Ano"
+  },
+  {
+    "Název modulu": "order-status-color",
+    "Marketingový název modulu": "Obarvené stavy objednávky",
+    "Poslední verze modulu": "",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/admin-ui/order-status-color/",
+    "Kategorie": "admin-ui",
+    "Prezentovat na DOCS": "Ano",
+    "Stav dokumentace": "Done",
+    "Develop": "Ano",
+    "Live": "Ano"
+  },
+  {
+    "Název modulu": "street-house-number-validator",
+    "Marketingový název modulu": "Kontrola adresy - ulice a č. p.",
+    "Poslední verze modulu": "",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/street-house-number-validator/",
+    "Kategorie": "",
+    "Prezentovat na DOCS": "Ano",
+    "Stav dokumentace": "Done",
+    "Develop": "Ano",
+    "Live": "Ano"
+  },
+  {
+    "Název modulu": "product-attachments",
+    "Marketingový název modulu": "Přílohy k produktu",
+    "Poslední verze modulu": "",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/product-attachments",
+    "Kategorie": "catalog",
+    "Prezentovat na DOCS": "Ano",
+    "Stav dokumentace": "Done",
+    "Develop": "Ano",
+    "Live": "Ano"
+  },
+  {
+    "Název modulu": "ui-tools",
+    "Marketingový název modulu": "UI nástroje",
+    "Poslední verze modulu": "v1.0.0",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/ui/ui-tools",
+    "Kategorie": "ui",
+    "Prezentovat na DOCS": "Ne - interní modul",
+    "Stav dokumentace": "Done",
+    "Develop": "Ne",
+    "Live": "Ne"
+  },
+  {
+    "Název modulu": "grouped-product-attributes",
+    "Marketingový název modulu": "Seskupený produkt - atributy",
+    "Poslední verze modulu": "",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/grouped-product-attributes",
+    "Kategorie": "catalog",
+    "Prezentovat na DOCS": "Ne",
+    "Stav dokumentace": "Done",
+    "Develop": "Ne",
+    "Live": "Ne"
+  },
+  {
+    "Název modulu": "grouped-product-attributes-config",
+    "Marketingový název modulu": "Seskupený produkt - konfigurace atributů",
+    "Poslední verze modulu": "",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/grouped-product-attributes-config",
+    "Kategorie": "catalog",
+    "Prezentovat na DOCS": "Ne",
+    "Stav dokumentace": "Done",
+    "Develop": "Ne",
+    "Live": "Ne"
+  },
+  {
+    "Název modulu": "product-price-decimal",
+    "Marketingový název modulu": "Zatím není",
+    "Poslední verze modulu": "",
+    "WWW adresa": "https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/product-price-decimal",
+    "Kategorie": "catalog",
+    "Prezentovat na DOCS": "Ano",
+    "Stav dokumentace": "NONE",
+    "Develop": "Ne",
+    "Live": "Ne"
+  }
+]

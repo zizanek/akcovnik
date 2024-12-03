@@ -1,0 +1,10 @@
+Název modulu;Marketingový název modulu;Poslední verze modulu;WWW adresa;Kategorie;Prezentovat na DOCS;Stav dokumentace;Develop;Live
+ordercomments;Poznámka u objednávky;v2.3.1;https://git.getready.cz/magento/m2/magento2-modules-getready/ordercomments/;checkout;Ano;Done;Ano;Ano
+balikovna;Balíkovna;;https://git.getready.cz/magento/m2/magento2-modules-getready/shipping-methods/ceska-posta/balikovna;Shipping-methods;Ano;Done;Ano;Ano
+order-status-color;Obarvené stavy objednávky;;https://git.getready.cz/magento/m2/magento2-modules-getready/admin-ui/order-status-color/;admin-ui;Ano;Done;Ano;Ano
+street-house-number-validator;Kontrola adresy - ulice a è. p.;;https://git.getready.cz/magento/m2/magento2-modules-getready/street-house-number-validator/;;Ano;Done;Ano;Ano
+product-attachments;Pøílohy k produktu;;https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/product-attachments;catalog;Ano;Done;Ano;Ano
+ui-tools;UI nástroje;v1.0.0;https://git.getready.cz/magento/m2/magento2-modules-getready/ui/ui-tools;ui;Ne - interní modul;Done;Ne;Ne
+grouped-product-attributes;Seskupený produkt - atributy;;https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/grouped-product-attributes;catalog;Ne;Done;Ne;Ne
+grouped-product-attributes-config;Seskupený produkt - konfigurace atributù;;https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/grouped-product-attributes-config;catalog;Ne;Done;Ne;Ne
+product-price-decimal;Zatím není;;https://git.getready.cz/magento/m2/magento2-modules-getready/catalog/product-price-decimal;catalog;Ano;NONE;Ne;Ne
