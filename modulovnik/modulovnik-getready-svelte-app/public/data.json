@@ -1,0 +1,17 @@
+{
+  "headers": ["Modul", "Popis", "Autor", "Verze"],
+  "rows": [
+      {
+          "Modul": "Modul A",
+          "Popis": "Modul na správu objednávek",
+          "Autor": "John Doe",
+          "Verze": "1.0.0"
+      },
+      {
+          "Modul": "Modul B",
+          "Popis": "Modul pro napojení na API",
+          "Autor": "Jane Smith",
+          "Verze": "2.1.3"
+      }
+  ]
+}
