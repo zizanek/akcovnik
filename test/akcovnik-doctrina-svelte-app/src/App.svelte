@@ -82,6 +82,10 @@
               return `<div style="background-color: #e67e22; color: white;">${value}</div>`;
             if (value === "Mateřská škola")
               return `<div style="background-color: #9b59b6; color: white;">${value}</div>`;
+            if (value === "MŠ NEW Doctrina")
+              return `<div style="background-color: #d50d50; color: white;">${value}</div>`;
+            if (value === "ZŠ NEW Doctrina")
+              return `<div style="background-color: #ca2a7a; color: white;">${value}</div>`;
           }
           return cell.getValue(); // Výchozí hodnota
         },
@@ -171,7 +175,7 @@
 </style>
 
 <div>
-  <h1>Akčník Doctrina</h1>
+  <h1>Akcovník Doctrina</h1>
   <input type="file" accept=".csv" on:change={handleFile} />
   <button on:click={exportJson} disabled={!jsonData.length}>
     Exportovat do JSON
@@ -216,6 +220,16 @@
       style="background-color: #9b59b6; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
       on:click={() => filterTable("Mateřská škola")}>
       Mateřská škola
+    </button>
+    <button
+      style="background-color: #d50d50; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
+      on:click={() => filterTable("MŠ NEW Doctrina")}>
+      MŠ NEW Doctrina
+    </button>
+    <button
+      style="background-color: #ca2a7a; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
+      on:click={() => filterTable("ZŠ NEW Doctrina")}>
+      ZŠ NEW Doctrina
     </button>
     <button
       style="background-color: #bdc3c7; color: black; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"

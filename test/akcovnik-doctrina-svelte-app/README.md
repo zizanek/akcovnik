@@ -1,3 +1,23 @@
+# Akcovník Doctrina
+## Postup
+
+- po vyklonování spustit ve složce "akcovnik-doctrina-svelte-app"
+  - nmp install
+  - npm run dev 
+  - aplikace je nyní spustilelná na lokále na adrese "http://localhost:5173/"
+
+- postup od Excelu k JSON souboru
+  - soubor "Akcovník_DPG_úprava_TŽ.xlsx"
+    - list "Akcovník_DPG_úprava_TŽ" uložíme jako CSV formát (textový soubor s oddělovači)
+  - ve spuštené aplikaci na lokále nyní zvolíme "Vybrat soubor" a vybereme zmíněný CSV soubor
+
+- jak provedeme build aplikace do složky "dist"
+  - pomocí příkazu "npm run build"
+  - spuštění buld verze můžeme pvěřit pomocí "npx serve dist"
+
+
+
+
 # Svelte + Vite
 
 This template should help get you started developing with Svelte in Vite.
