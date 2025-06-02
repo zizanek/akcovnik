@@ -8,7 +8,9 @@
   let error = "";
   let table;
 
-  // Funkce na čtení CSV souboru a převod do JSON
+  let selectedRowData = null;
+  let showModal = false;
+
   function handleFile(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -21,7 +23,7 @@
           const csv = decoder.decode(new Uint8Array(e.target.result));
           jsonData = csvToJson(csv);
           error = "";
-          createTable(); // Vytvoření tabulky po načtení dat
+          createTable();
         } else {
           error = "Nepodporovaný formát souboru.";
         }
@@ -32,7 +34,6 @@
     reader.readAsArrayBuffer(file);
   }
 
-  // CSV -> JSON převod
   function csvToJson(csvText) {
     const rows = csvText.split("\n").map((row) => row.split(";"));
     const headers = rows[0];
@@ -44,7 +45,6 @@
     );
   }
 
-  // Export JSON souboru
   function exportJson() {
     const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
       type: "application/json",
@@ -72,8 +72,8 @@
         headerFilterPlaceholder: `Filtruj ${key}`,
         frozen: index < 2,
         formatter: (cell) => {
+          const value = cell.getValue();
           if (key === "Škola - oddělení") {
-            const value = cell.getValue();
             if (value === "Gymnázium")
               return `<div style="background-color: #3498db; color: white;">${value}</div>`;
             if (value === "Základní škola")
@@ -87,11 +87,19 @@
             if (value === "ZŠ NEW Doctrina")
               return `<div style="background-color: #ca2a7a; color: white;">${value}</div>`;
           }
-          return cell.getValue(); // Výchozí hodnota
+          if (key === "Akce") {
+            return `<a href="#" style="color: #2980b9; text-decoration: underline;">${value}</a>`;
+          }
+          return value;
+        },
+        cellClick: (e, cell) => {
+          if (key === "Akce") {
+            openDetail(cell.getRow().getData());
+          }
         },
       })),
       pageLoaded: function () {
-        table.redraw(true); // Přepočítá šířky sloupců
+        table.redraw(true);
       },
     });
   }
@@ -104,7 +112,6 @@
     }
   }
 
-  // Filtruje tabulku podle měsíce
   function filterByMonth(month) {
     if (month === "all") {
       table.clearFilter();
@@ -113,21 +120,10 @@
     }
   }
 
-  // Získání seznamu měsíců
   function getMonths() {
     const months = [
-      "Leden",
-      "Únor",
-      "Březen",
-      "Duben",
-      "Květen",
-      "Červen",
-      "Červenec",
-      "Srpen",
-      "Září",
-      "Říjen",
-      "Listopad",
-      "Prosinec",
+      "Leden", "Únor", "Březen", "Duben", "Květen", "Červen",
+      "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec",
     ];
     const currentMonth = new Date().getMonth();
     return [...months.slice(currentMonth), ...months.slice(0, currentMonth)];
@@ -135,7 +131,16 @@
 
   let months = getMonths();
 
-  // Načtení JSON souboru při spuštění
+  function openDetail(rowData) {
+    selectedRowData = rowData;
+    showModal = true;
+  }
+
+  function closeModal() {
+    selectedRowData = null;
+    showModal = false;
+  }
+
   onMount(async () => {
     try {
       const response = await fetch("data.json");
@@ -153,16 +158,13 @@
     margin-top: 20px;
     border: 1px solid #ccc;
   }
-
   h1, input, button {
     font-family: "Open Sans", sans-serif;
   }
-
   .error {
     color: red;
     margin-top: 10px;
   }
-
   .month-button {
     background-color: #bdc3c7;
     color: black;
@@ -172,6 +174,7 @@
     border-radius: 4px;
     cursor: pointer;
   }
+
 </style>
 
 <div>
@@ -187,56 +190,44 @@
 
   <div>
     {#each months as month}
-      <button
-        class="month-button"
-        on:click={() => filterByMonth(month)}>
+      <button class="month-button" on:click={() => filterByMonth(month)}>
         {month}
       </button>
     {/each}
-    <button
-      class="month-button"
-      on:click={() => filterByMonth("all")}>
+    <button class="month-button" on:click={() => filterByMonth("all")}>
       Zobrazit vše
     </button>
   </div>
 
   <div>
-    <button
-      style="background-color: #3498db; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
-      on:click={() => filterTable("Gymnázium")}>
-      Gymnázium
-    </button>
-    <button
-      style="background-color: #2ecc71; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
-      on:click={() => filterTable("Základní škola")}>
-      Základní škola
-    </button>
-    <button
-      style="background-color: #e67e22; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
-      on:click={() => filterTable("Základní škola - 1. stupeň")}>
-      Základní škola - 1. stupeň
-    </button>
-    <button
-      style="background-color: #9b59b6; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
-      on:click={() => filterTable("Mateřská škola")}>
-      Mateřská škola
-    </button>
-    <button
-      style="background-color: #d50d50; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
-      on:click={() => filterTable("MŠ NEW Doctrina")}>
-      MŠ NEW Doctrina
-    </button>
-    <button
-      style="background-color: #ca2a7a; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
-      on:click={() => filterTable("ZŠ NEW Doctrina")}>
-      ZŠ NEW Doctrina
-    </button>
-    <button
-      style="background-color: #bdc3c7; color: black; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; cursor: pointer;"
-      on:click={() => filterTable("all")}>
-      Zobrazit vše
-    </button>
+    <button style="background-color: #3498db;" on:click={() => filterTable("Gymnázium")}>Gymnázium</button>
+    <button style="background-color: #2ecc71;" on:click={() => filterTable("Základní škola")}>Základní škola</button>
+    <button style="background-color: #e67e22;" on:click={() => filterTable("Základní škola - 1. stupeň")}>Základní škola - 1. stupeň</button>
+    <button style="background-color: #9b59b6;" on:click={() => filterTable("Mateřská škola")}>Mateřská škola</button>
+    <button style="background-color: #d50d50;" on:click={() => filterTable("MŠ NEW Doctrina")}>MŠ NEW Doctrina</button>
+    <button style="background-color: #ca2a7a;" on:click={() => filterTable("ZŠ NEW Doctrina")}>ZŠ NEW Doctrina</button>
+    <button style="background-color: #bdc3c7; color: black;" on:click={() => filterTable("all")}>Zobrazit vše</button>
   </div>
 
   <div id="tabulator-table"></div>
+
+  {#if showModal && selectedRowData}
+    <div style="position: fixed; inset: 0; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 999;">
+      <div style="background: white; color: black; padding: 20px; border-radius: 10px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h2 style="margin: 0;">Detail akce</h2>
+          <button on:click={closeModal} style="color: black; background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+        </div>
+        <hr>
+        <ul style="list-style-type: none; padding-left: 0;">
+          {#each Object.entries(selectedRowData) as [key, value]}
+            <!-- // pokud se nejedná o prázdný záznam, tak zobrazujeme - poslední JSON řádek -->
+            {#if key.trim() !== ""}
+              <li style="margin-bottom: 8px;"><strong>{key}:</strong> {value}</li>
+            {/if}
+          {/each}
+        </ul>
+      </div>
+    </div>
+  {/if}
 </div>
